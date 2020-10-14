@@ -3,6 +3,10 @@ const path = require('path');
 
 const app = express();
 
+app.get('/api/test', (req, res) => {
+  res.send({data: 'test'})
+})
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
