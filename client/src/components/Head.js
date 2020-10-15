@@ -1,9 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
+
+import '../sass/App.sass'
 
 function Head(props) {
     return (
-        <div>
+        <div className='main-head'>
             <div className='weather-display'>
                 77 Partly Cloudy
             </div>
@@ -16,16 +18,16 @@ function Head(props) {
                 <ul>
                     <li>Home</li>
                     <li>Daily</li>
-                    <li>Other</li>
+                    <li>Otheer</li>
                 </ul>
             </nav>
         </div>
     )
 }
 
-Head.propTypes = {
+// Head.propTypes = {
 
-}
+// }
 
 export default Head
 

@@ -3,7 +3,7 @@ import React from 'react';
 import Head from './components/Head'
 import ArticleDashboard from './components/ArticleDashboard/ArticleDashboard'
 
-import './App.css';
+import './sass/App.sass';
 
 
 function App() {

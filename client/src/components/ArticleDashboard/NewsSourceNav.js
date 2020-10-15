@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 function NewsSourceNav(props) {
     return (
@@ -9,9 +9,9 @@ function NewsSourceNav(props) {
     )
 }
 
-NewsSourceNav.propTypes = {
+// NewsSourceNav.propTypes = {
 
-}
+// }
 
 export default NewsSourceNav
 
