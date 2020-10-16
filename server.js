@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 app.get('/api/news', async (req, res) => {
 
   try {
-    const nRes = await axios('https://newsapi.org/v2/top-headlines?country=us&pageSize=7&apiKey=e5da89b57ee347a1a1da306427dc5fa7')
+    const nRes = await axios('https://newsapi.org/v2/top-headlines?country=us&pageSize=15&apiKey=e5da89b57ee347a1a1da306427dc5fa7')
 
     res.send({articles: nRes.data.articles})
   } catch (err) {

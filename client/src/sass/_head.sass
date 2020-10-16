@@ -5,12 +5,13 @@
     background-color: $bg-color-main
     width: 100%
     min-width: 380px
-    height: 100px
+    height: auto
     display: grid
     grid-template-areas: 'w' 'n'
 
     .weather-display
         font-family: $font-italic
+        padding: .4em
         grid-area: w
         display: flex
         justify-content: space-between
@@ -23,5 +24,4 @@
 
 @media only screen and (min-width: 600px)
     .weather-display
-        padding: .6rem
         font-size: 1.5em

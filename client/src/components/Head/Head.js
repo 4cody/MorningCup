@@ -3,7 +3,7 @@ import React from 'react'
 import axios from 'axios'
 
 import Weather from './Weather'
-import MainNav from './MainNav'
+// import MainNav from './MainNav'
 
 import '../../sass/App.sass'
 
@@ -18,10 +18,6 @@ function Head(props) {
         })() 
     },[])
 
-    // if(wData) {
-    //     console.log(wData)
-    // }
-
     return (
         <div className='main-head'>
             <Weather temp={wData.temp} loc={wData.city_name} sky={wData.weather}/>
@@ -30,7 +26,7 @@ function Head(props) {
 
             </div>
 
-            <MainNav />
+            {/* <MainNav /> */}
         </div>
     )
 }
