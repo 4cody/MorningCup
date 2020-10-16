@@ -6,24 +6,22 @@ import Article from './Article'
 import '../../sass/App.sass'
 
 function Articles({data}) {
-
-    const articleMapper = () => (
-        data.map(item => (
-            <Article 
-                author={item.author} 
-                title={item.title} 
-                img={item.urlToImage} 
-                content={item.content} 
-                desc={item.description}/>
-        ))
-    )
-
     return (
-        <div className='article-container'>
+        <ul className='article-container'>
             
-            {articleMapper()}
+            {data.map(item => (
+                <li key={item.publishedAt}>
+                    <Article
+                        outlet={item.source.name}
+                        author={item.author} 
+                        title={item.title} 
+                        img={item.urlToImage} 
+                        content={item.content} 
+                        desc={item.description}/>
+                </li>))
+            }
 
-        </div>
+        </ul>
     )
 }
 
