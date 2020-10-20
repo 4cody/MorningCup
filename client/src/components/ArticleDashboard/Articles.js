@@ -7,7 +7,7 @@ import '../../sass/App.sass'
 
 function Articles({data}) {
     return (
-        <ul className='article-container'>
+        <ul className='articles-container'>
             
             {data.map(item => (
                 <li key={item.publishedAt}>
