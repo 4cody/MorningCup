@@ -1,11 +1,11 @@
 const express = require('express');
 const path = require('path');
-const connectDB = require('./config/db');
+// const connectDB = require('./config/db');
 
 const app = express();
 
 // Connect Database
-connectDB();
+// connectDB();
 
 
 // Middleware
@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api', require('./routes/api'))
-app.use('/auth', require('./routes/auth'))
+// app.use('/auth', require('./routes/auth'))
 
 //  Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
