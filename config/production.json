@@ -1,0 +1,5 @@
+  
+{
+    "mongoURI": "mongodb+srv://taskapp:taskapp1@taskappcluster.h2eur.mongodb.net/morning?retryWrites=true&w=majority",
+    "jwtSecret": "JWTsecretMorning"
+  }

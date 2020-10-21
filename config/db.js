@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
-
-
-const URI = 'mongodb+srv://taskapp:taskapp1@taskappcluster.h2eur.mongodb.net/morning?retryWrites=true&w=majority'
+const config = require('config')
 
 const connectDB = async () => {
 	try {
-		await mongoose.connect(URI, {
+		await mongoose.connect(config.get('jwtSecret'), {
 			useNewUrlParser: true,
 			useCreateIndex: true,
 			useFindAndModify: false,
