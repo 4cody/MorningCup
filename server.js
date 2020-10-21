@@ -2,24 +2,19 @@ const express = require('express');
 const path = require('path');
 const axios = require('axios')
 const bcrypt = require('bcryptjs')
+const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
+
+const connectDB = require('./config/db');
+const User = require('./models/user')
 
 const app = express();
 
-// const users = [{
-//   name: 'smith',
-//   password: 'pass'
-// },
-// {
-//   name: 'bob',
-//   password: 'pass1'
-// },
-// {
-//   name: 'mo',
-//   a: 'a',
-//   password: 'pass2'
-// }]
+// Connect Database
+connectDB();
 
-const users = []
+
+const secret = "someRndSec"
 
 app.use(express.json());
 
@@ -36,42 +31,54 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/auth/users', async (req, res) => {
+  const users = await User.find({})
+
+  res.send(users)
+})
+
 app.post('/auth/reg', async (req, res) => {
   try{
     const hashed = await bcrypt.hash(req.body.password, 10)
 
-    const nu = {name: req.body.name, password: hashed}
+    const newUser = new User({name: req.body.name, password: hashed})
+
+    const user = await newUser.save()
+
+    const payload = {
+      user: {
+        id: user.id
+      }
+    };
+
+    jwt.sign(
+      payload,
+      secret,
+      { expiresIn: '5 days' },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );  
   
-    users.push(nu)
-    res.send(users)
   }catch{
     res.status(500).send()
   }
 })
 
 app.post('/auth/login', async (req, res) => {
-  const foundUser = users.find( user => user.name == req.body.name)
-
-  if(foundUser == null || undefined) {
-    return res.status(400).send('no user found')
-  }
-
   try{
-    const compared = await bcrypt.compare(req.body.password, foundUser.password)
-
-    if(compared == false) {
+    if(await bcrypt.compare(req.body.password, foundUser.password)) {
       res.status(401).send('invalid credentials')
     } else {
       res.json(foundUser)
     }
-
   }catch{
     res.status().send()
   }
 })
 
 app.get('/api/news', async (req, res) => {
-
   try {
     const nRes = await axios('https://newsapi.org/v2/top-headlines?country=us&pageSize=15&apiKey=e5da89b57ee347a1a1da306427dc5fa7')
 
@@ -100,5 +107,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const PORT = process.env.PORT || 8020;
+
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
