@@ -1,34 +1,31 @@
-import React from 'react'
+import React from 'react';
 // import PropTypes from 'prop-types'
-import axios from 'axios'
+import axios from 'axios';
+import { connect } from 'react-redux';
 
-import Articles from './Articles'
-import NewsSourceNav from './NewsSourceNav'
+import Articles from './Articles';
+import NewsSourceNav from './NewsSourceNav';
 
 function ArticleDashboard(props) {
+  const [articles, setNews] = React.useState([]);
 
-    const [articles, setNews] = React.useState([])
+  React.useEffect(() => {
+    (async () => {
+      const res = await axios.get('/api/news');
+      setNews(res.data.articles);
+    })();
+  }, []);
 
-    React.useEffect(() => {
-        (async () => {
-            const res = await axios.get('/api/news')
-            setNews(res.data.articles)
-        })()    
-    },[])
-
-
-    return (
-        <>
-            <NewsSourceNav />
-            <Articles data={articles}/>
-        </>
-    )
+  return (
+    <>
+      <NewsSourceNav />
+      <Articles data={articles} />
+    </>
+  );
 }
 
 // ArticleDashboard.propTypes = {
 
 // }
 
-export default ArticleDashboard
-
-  
+export default connect(mapStateToProps, {})(ArticleDashboard);
